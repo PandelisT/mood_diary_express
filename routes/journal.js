@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Journal = require('../models/Journal');
+const auth = require("../middleware/auth");
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const journals = await Journal.find();
         res.json(journals)
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const journal = new Journal({
         journal_entry: req.body.journal_entry
     });

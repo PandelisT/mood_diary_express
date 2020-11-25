@@ -13,6 +13,9 @@ app.use(bodyParser.json());
 const journalRoute = require('./routes/journal');
 app.use('/journal', journalRoute);
 
+const registerRoute = require('./routes/user');
+app.use('/user', registerRoute);
+
 // DB connection
 mongoose.connect(process.env.DB_CONNECTION, 
 { useNewUrlParser: true, useUnifiedTopology: true}, () =>
