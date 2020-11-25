@@ -3,18 +3,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv/config');
 
+// Save express app as variable
 const app = express();
 
+// parse as json
 app.use(bodyParser.json());
 
 //Import routes
-const postsRoute = require('./routes/posts');
-app.use('/posts', postsRoute);
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('We are on home');
-});
+const journalRoute = require('./routes/journal');
+app.use('/journal', journalRoute);
 
 // DB connection
 mongoose.connect(process.env.DB_CONNECTION, 
@@ -22,6 +19,6 @@ mongoose.connect(process.env.DB_CONNECTION,
     console.log('Connected to DB') 
 );
 
-
+// listen on localhost:3000
 app.listen(3000);
 
