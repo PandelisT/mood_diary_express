@@ -24,7 +24,7 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-router.get('/:journalId', async (req, res) => {
+router.get('/:journalId', auth, async (req, res) => {
     try {
         const journal = await Journal.findById(req.params.journalId);
     res.json(journal);
