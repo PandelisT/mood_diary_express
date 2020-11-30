@@ -1,27 +1,18 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('dotenv/config');
-
-// Save express app as variable
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
 const app = express();
+const passport = require("./config/passport");
 
-// parse as json
-app.use(bodyParser.json());
+app.use(cors());
 
-//Import routes
-const journalRoute = require('./routes/journal');
-app.use('/journal', journalRoute);
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(morgan("combined"));
+app.use(passport.initialize());
 
-const registerRoute = require('./routes/user');
-app.use('/user', registerRoute);
+app.use(require("./routes/auth_routes.js"));
 
-// DB connection
-mongoose.connect(process.env.DB_CONNECTION, 
-{ useNewUrlParser: true, useUnifiedTopology: true}, () =>
-    console.log('Connected to DB') 
-);
+module.exports = app;
 
-// listen on localhost:3000
-app.listen(3000);
 

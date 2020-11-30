@@ -14,7 +14,8 @@ router.get('/', auth, async (req, res) => {
 
 router.post('/', auth, async (req, res) => {
     const journal = new Journal({
-        journal_entry: req.body.journal_entry
+        journal_entry: req.body.journal_entry,
+        user: req.user.user
     });
     try{
     const savedJournal = await journal.save()
