@@ -3,7 +3,6 @@ const JWTService = require("./../services/jwt_service");
 const bodyParser = require('body-parser')
 
 async function register(req, res) {
-  console.log(req.body);
   let username = req.body.username;
   let password = req.body.password;
   let email = req.body.email;
