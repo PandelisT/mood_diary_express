@@ -4,7 +4,9 @@ const bodyParser = require('body-parser')
 
 async function register(req, res) {
   console.log(req.body);
-  let { username, email, password } = req.body.values;
+  let username = req.body.username;
+  let password = req.body.password;
+  let email = req.body.email;
 
   try {
     const user = await UserModel.create({
@@ -42,7 +44,7 @@ async function update(req, res) {
 
   const { user } = req;
   user.email = email;
-  user.username = firstName;
+  user.username = username;
   user.password = password;
 
   try {

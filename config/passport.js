@@ -20,10 +20,11 @@ passport.use(new LocalStrategy({
     usernameField: "email"
     },
     async (email, password, done) => {
+        console.log(email, password);
         try {
             const user = await UserModel.findOne({ email })
-
-            if (user && user.verifyPasswordSync(password)) {
+            console.log(user)
+            if (user && user.password !== password) {
                 return done(null, user);
             }
             return done(null, false);
@@ -53,3 +54,4 @@ passport.use(new JwtStrategy(
 
 
 module.exports = passport;
+
